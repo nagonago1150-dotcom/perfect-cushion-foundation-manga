@@ -38,6 +38,54 @@
         --gold-accent: #DAA520;
       }
 
+      /* ===== Smooth Scroll ===== */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Scroll to Top Button */
+      #scroll-to-top {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #scroll-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      #scroll-to-top:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+      }
+
+      @media (max-width: 768px) {
+        #scroll-to-top {
+          bottom: 70px;
+          right: 15px;
+          width: 45px;
+          height: 45px;
+          font-size: 20px;
+        }
+      }
+
       /* Slightly Darker Elegant Background */
       body {
         background: linear-gradient(-45deg, #F8F6F3, #F5F2EE, #F0EDE8, #EAE5DD);
@@ -93,13 +141,14 @@
         }
       }
 
-      /* Luxury CTA Buttons */
+      /* Luxury CTA Buttons with Enhanced Breathing Animation */
       .cta-button {
         background: var(--accent-gradient);
         position: relative;
         overflow: hidden;
-        animation: pulse 3s infinite;
+        animation: breathe 2.5s ease-in-out infinite, pulse 3s infinite;
         box-shadow: 0 4px 20px rgba(139, 69, 19, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
       .cta-button::before {
@@ -117,10 +166,50 @@
         left: 100%;
       }
 
+      /* Enhanced Breathing Effect */
+      @keyframes breathe {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.03);
+        }
+      }
+
       @keyframes pulse {
         0% { box-shadow: 0 4px 20px rgba(139, 69, 19, 0.3); }
-        50% { box-shadow: 0 4px 30px rgba(218, 165, 32, 0.5); }
+        50% { box-shadow: 0 4px 30px rgba(218, 165, 32, 0.5), 0 0 20px rgba(218, 165, 32, 0.3); }
         100% { box-shadow: 0 4px 20px rgba(139, 69, 19, 0.3); }
+      }
+
+      /* Click Ripple Effect */
+      .cta-button::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s, opacity 0.6s;
+        opacity: 0;
+      }
+
+      .cta-button:active::after {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(139, 69, 19, 0.4);
+      }
+
+      .cta-button:active {
+        transform: translateY(0);
       }
 
       /* Comic Viewer Enhancement */
@@ -808,6 +897,238 @@
         animation: fadeIn 1s ease-out;
       }
 
+      /* ===== Scroll Trigger Animations ===== */
+
+      /* Initial hidden state for scroll animations */
+      .scroll-fade-up {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-fade-up.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .scroll-slide-left {
+        opacity: 0;
+        transform: translateX(-80px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-slide-left.is-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scroll-slide-right {
+        opacity: 0;
+        transform: translateX(80px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-slide-right.is-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scroll-zoom-in {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-zoom-in.is-visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* Stagger animation delays for multiple elements */
+      .scroll-stagger-1 { transition-delay: 0.1s; }
+      .scroll-stagger-2 { transition-delay: 0.2s; }
+      .scroll-stagger-3 { transition-delay: 0.3s; }
+      .scroll-stagger-4 { transition-delay: 0.4s; }
+      .scroll-stagger-5 { transition-delay: 0.5s; }
+
+      /* Section reveal animation */
+      .section-reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+      }
+
+      .section-reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ===== 3D Tilt Effect for Product Images ===== */
+      .tilt-3d {
+        transform-style: preserve-3d;
+        transition: transform 0.3s ease-out;
+        will-change: transform;
+      }
+
+      .product-image.tilt-3d {
+        perspective: 1000px;
+      }
+
+      .product-content img.tilt-3d {
+        perspective: 1000px;
+      }
+
+      /* Add depth to tilted elements */
+      .tilt-3d:hover {
+        transform: translateZ(20px);
+      }
+
+      /* ===== Card Flip Effect ===== */
+      .flip-card {
+        perspective: 1000px;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+      }
+
+      .flip-card.flipped .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .flip-card-front,
+      .flip-card-back {
+        width: 100%;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+
+      .flip-card-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: rotateY(180deg);
+        background: rgba(255, 255, 255, 0.98);
+        padding: 32px;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(139, 69, 19, 0.15);
+      }
+
+      .flip-card-back h4 {
+        color: var(--luxury-brown);
+        margin-bottom: 16px;
+        font-size: 18px;
+      }
+
+      .flip-card-back p {
+        color: rgba(101, 67, 33, 0.9);
+        line-height: 1.8;
+        font-size: 14px;
+      }
+
+      .flip-card-back .back-icon {
+        font-size: 32px;
+        margin-bottom: 16px;
+        display: block;
+      }
+
+      /* Flip indicator */
+      .flip-indicator {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        background: rgba(139, 69, 19, 0.1);
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        color: var(--luxury-brown);
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+      }
+
+      .flip-card:hover .flip-indicator {
+        opacity: 1;
+      }
+
+      /* ===== Before/After Interactive Slider ===== */
+      .before-after-slider {
+        position: relative;
+        width: 100%;
+        height: 120px;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: ew-resize;
+        user-select: none;
+      }
+
+      .before-after-content {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        transition: opacity 0.3s ease;
+      }
+
+      .before-content {
+        left: 0;
+        background: linear-gradient(135deg, rgba(255, 182, 193, 0.2), rgba(255, 182, 193, 0.1));
+        border-right: 2px solid rgba(139, 69, 19, 0.3);
+      }
+
+      .after-content {
+        right: 0;
+        background: linear-gradient(135deg, rgba(218, 165, 32, 0.2), rgba(218, 165, 32, 0.1));
+        border-left: 2px solid rgba(139, 69, 19, 0.3);
+      }
+
+      .slider-handle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        background: white;
+        border: 3px solid var(--luxury-brown);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        cursor: ew-resize;
+        box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+        transition: transform 0.2s ease;
+      }
+
+      .slider-handle:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+
+      .slider-handle::before {
+        content: '⟷';
+        font-size: 18px;
+        color: var(--luxury-brown);
+      }
+
+      .slider-divider {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 2px;
+        height: 100%;
+        background: var(--luxury-brown);
+        z-index: 9;
+      }
+
       /* New Review Format Styles */
       .review-content {
         margin-bottom: 24px;
@@ -1454,6 +1775,440 @@
         パーフェクトワン¥2,640
       </a>
     </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" aria-label="ページトップへ戻る">↑</button>
+
+    <!-- ===== Enhanced Animation Scripts ===== -->
+    <script>
+      // ===== 1. Scroll Trigger Animation using Intersection Observer =====
+      (function() {
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+        };
+
+        const observerCallback = (entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              // Optionally unobserve after animation
+              // observer.unobserve(entry.target);
+            }
+          });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        // Add scroll animations to sections
+        document.addEventListener('DOMContentLoaded', () => {
+          // Animate sections
+          const sections = document.querySelectorAll('.cta-section, .products-section, .science-section, .testimonials-section');
+          sections.forEach((section, index) => {
+            section.classList.add('section-reveal');
+            observer.observe(section);
+          });
+
+          // Animate product steps with alternating directions
+          const productSteps = document.querySelectorAll('.product-step');
+          productSteps.forEach((step, index) => {
+            const direction = index % 2 === 0 ? 'scroll-slide-left' : 'scroll-slide-right';
+            step.classList.add(direction, `scroll-stagger-${Math.min(index + 1, 5)}`);
+            observer.observe(step);
+          });
+
+          // Animate testimonial cards with stagger
+          const testimonialCards = document.querySelectorAll('.testimonial-card');
+          testimonialCards.forEach((card, index) => {
+            card.classList.add('scroll-zoom-in', `scroll-stagger-${Math.min(index + 1, 5)}`);
+            observer.observe(card);
+          });
+
+          // Animate science/natural columns
+          const scienceColumns = document.querySelectorAll('.science-column, .natural-column');
+          scienceColumns.forEach((column, index) => {
+            const direction = index === 0 ? 'scroll-slide-left' : 'scroll-slide-right';
+            column.classList.add(direction);
+            observer.observe(column);
+          });
+
+          // Animate section titles
+          const sectionTitles = document.querySelectorAll('.section-title');
+          sectionTitles.forEach(title => {
+            title.classList.add('scroll-fade-up');
+            observer.observe(title);
+          });
+        });
+      })();
+
+      // ===== 2. Price Count-Up Animation =====
+      (function() {
+        function animateCounter(element, target, duration = 2000, prefix = '¥', suffix = '') {
+          let start = 0;
+          const increment = target / (duration / 16); // 60fps
+          const startTime = performance.now();
+
+          function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Easing function (ease-out)
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(start + (target - start) * easeOut);
+
+            element.textContent = prefix + current.toLocaleString() + suffix;
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            } else {
+              element.textContent = prefix + target.toLocaleString() + suffix;
+            }
+          }
+
+          requestAnimationFrame(updateCounter);
+        }
+
+        const priceObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.dataset.counted) {
+              entry.target.dataset.counted = 'true';
+
+              // Extract number from text
+              const text = entry.target.textContent;
+              const match = text.match(/[\d,]+/);
+
+              if (match) {
+                const targetNumber = parseInt(match[0].replace(/,/g, ''));
+                const hasYen = text.includes('¥');
+                const prefix = hasYen ? '¥' : '';
+
+                animateCounter(entry.target, targetNumber, 1500, prefix, '');
+              }
+            }
+          });
+        }, { threshold: 0.5 });
+
+        document.addEventListener('DOMContentLoaded', () => {
+          // Observe price elements
+          const priceElements = document.querySelectorAll('.special');
+          priceElements.forEach(el => priceObserver.observe(el));
+        });
+      })();
+
+      // ===== 3. 3D Tilt Effect for Product Images =====
+      (function() {
+        function applyTiltEffect(element) {
+          const tiltIntensity = 15; // degrees
+
+          element.addEventListener('mousemove', (e) => {
+            const rect = element.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -tiltIntensity;
+            const rotateY = ((x - centerX) / centerX) * tiltIntensity;
+
+            element.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+          });
+
+          element.addEventListener('mouseleave', () => {
+            element.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+          });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          // Apply tilt effect to product images
+          const productImages = document.querySelectorAll('.product-image, .product-content img');
+          productImages.forEach(img => {
+            img.classList.add('tilt-3d');
+            applyTiltEffect(img);
+          });
+        });
+      })();
+
+      // ===== 4. Parallax Effect for Comic Scenes =====
+      (function() {
+        let ticking = false;
+
+        function updateParallax() {
+          const scrolled = window.pageYOffset;
+          const comicScenes = document.querySelectorAll('.comic-scene');
+
+          comicScenes.forEach((scene, index) => {
+            const rect = scene.getBoundingClientRect();
+            const elementTop = rect.top + scrolled;
+            const elementHeight = rect.height;
+            const viewportHeight = window.innerHeight;
+
+            // Calculate parallax only when element is in viewport
+            if (rect.top < viewportHeight && rect.bottom > 0) {
+              // Different speed for each scene (alternating)
+              const speed = index % 2 === 0 ? 0.3 : -0.3;
+              const yPos = (scrolled - elementTop + viewportHeight) * speed;
+
+              scene.style.transform = `translateY(${yPos}px)`;
+            }
+          });
+
+          ticking = false;
+        }
+
+        function requestTick() {
+          if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+          }
+        }
+
+        window.addEventListener('scroll', requestTick);
+        window.addEventListener('resize', requestTick);
+
+        // Initial call
+        document.addEventListener('DOMContentLoaded', updateParallax);
+      })();
+
+      // ===== 5. Card Flip Effect for Science/Natural Cards =====
+      (function() {
+        const cardBackContent = {
+          science: {
+            icon: '🔬',
+            title: '科学技術の力',
+            description: '最先端のナノテクノロジーと皮膚科学の研究成果を活用し、肌の深層まで美容成分を届けます。50年以上の研究開発の成果がこの製品に凝縮されています。'
+          },
+          natural: {
+            icon: '🌿',
+            title: '自然の恵み',
+            description: '厳選された植物由来成分を93%以上配合。パラベン、鉱物油、合成着色料、合成香料を使わず、肌に優しく環境にも配慮した処方です。'
+          }
+        };
+
+        function createFlipCard(element, type) {
+          const content = element.innerHTML;
+          const backData = cardBackContent[type];
+
+          element.classList.add('flip-card');
+          element.innerHTML = `
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                ${content}
+                <div class="flip-indicator">クリックで詳細 ➜</div>
+              </div>
+              <div class="flip-card-back">
+                <span class="back-icon">${backData.icon}</span>
+                <h4>${backData.title}</h4>
+                <p>${backData.description}</p>
+                <div class="flip-indicator">クリックで戻る ↩</div>
+              </div>
+            </div>
+          `;
+
+          element.addEventListener('click', () => {
+            element.classList.toggle('flipped');
+          });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          const scienceColumn = document.querySelector('.science-column');
+          const naturalColumn = document.querySelector('.natural-column');
+
+          if (scienceColumn) createFlipCard(scienceColumn, 'science');
+          if (naturalColumn) createFlipCard(naturalColumn, 'natural');
+        });
+      })();
+
+      // ===== 6. Before/After Interactive Slider =====
+      (function() {
+        function createBeforeAfterSlider(beforeAfterElement) {
+          const before = beforeAfterElement.querySelector('.before p');
+          const after = beforeAfterElement.querySelector('.after p');
+
+          if (!before || !after) return;
+
+          const beforeText = before.textContent;
+          const afterText = after.textContent;
+
+          const sliderHTML = `
+            <div class="before-after-slider">
+              <div class="before-after-content before-content" style="clip-path: inset(0 50% 0 0);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--luxury-brown); margin-bottom: 4px;">Before</div>
+                <div style="font-size: 13px; color: rgba(101, 67, 33, 0.9);">${beforeText}</div>
+              </div>
+              <div class="before-after-content after-content" style="clip-path: inset(0 0 0 50%);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--luxury-brown); margin-bottom: 4px;">After</div>
+                <div style="font-size: 13px; color: rgba(101, 67, 33, 0.9);">${afterText}</div>
+              </div>
+              <div class="slider-divider"></div>
+              <div class="slider-handle"></div>
+            </div>
+          `;
+
+          beforeAfterElement.innerHTML = sliderHTML;
+
+          const slider = beforeAfterElement.querySelector('.before-after-slider');
+          const handle = slider.querySelector('.slider-handle');
+          const divider = slider.querySelector('.slider-divider');
+          const beforeContent = slider.querySelector('.before-content');
+          const afterContent = slider.querySelector('.after-content');
+
+          let isDragging = false;
+
+          function updateSlider(percentage) {
+            percentage = Math.max(0, Math.min(100, percentage));
+
+            handle.style.left = percentage + '%';
+            divider.style.left = percentage + '%';
+            beforeContent.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+            afterContent.style.clipPath = `inset(0 0 0 ${percentage}%)`;
+          }
+
+          function handleMove(clientX) {
+            const rect = slider.getBoundingClientRect();
+            const percentage = ((clientX - rect.left) / rect.width) * 100;
+            updateSlider(percentage);
+          }
+
+          // Mouse events
+          slider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            handleMove(e.clientX);
+          });
+
+          document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+              handleMove(e.clientX);
+            }
+          });
+
+          document.addEventListener('mouseup', () => {
+            isDragging = false;
+          });
+
+          // Touch events
+          slider.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            handleMove(e.touches[0].clientX);
+          });
+
+          document.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+              handleMove(e.touches[0].clientX);
+            }
+          });
+
+          document.addEventListener('touchend', () => {
+            isDragging = false;
+          });
+
+          // Click to move
+          slider.addEventListener('click', (e) => {
+            handleMove(e.clientX);
+          });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          const beforeAfterElements = document.querySelectorAll('.before-after');
+          beforeAfterElements.forEach(element => {
+            createBeforeAfterSlider(element);
+          });
+        });
+      })();
+
+      // ===== 7. Smooth Scroll & Scroll to Top =====
+      (function() {
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+        // Show/hide scroll to top button
+        function toggleScrollToTopButton() {
+          if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('visible');
+          } else {
+            scrollToTopBtn.classList.remove('visible');
+          }
+        }
+
+        // Scroll to top smoothly
+        scrollToTopBtn.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+
+        // Throttle scroll events for performance
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+          if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+          }
+          scrollTimeout = window.requestAnimationFrame(toggleScrollToTopButton);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+
+            // Skip if href is just "#"
+            if (href === '#') return;
+
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+
+              const headerOffset = 80; // Offset for fixed header if any
+              const elementPosition = target.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+
+        // Initial check
+        toggleScrollToTopButton();
+      })();
+
+      // ===== 8. Enhanced Performance & Browser Compatibility =====
+      (function() {
+        // Detect reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        if (prefersReducedMotion.matches) {
+          // Disable animations for users who prefer reduced motion
+          document.documentElement.style.setProperty('--animation-duration', '0s');
+          document.documentElement.style.scrollBehavior = 'auto';
+        }
+
+        // Add loading state
+        window.addEventListener('load', () => {
+          document.body.classList.add('loaded');
+        });
+
+        // Lazy load images optimization
+        if ('loading' in HTMLImageElement.prototype) {
+          const images = document.querySelectorAll('img[loading="lazy"]');
+          images.forEach(img => {
+            img.src = img.src;
+          });
+        } else {
+          // Fallback for browsers that don't support lazy loading
+          const script = document.createElement('script');
+          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+          document.body.appendChild(script);
+        }
+
+        // Console message for developers
+        console.log('%c✨ Enhanced Animations Loaded', 'color: #8B4513; font-size: 16px; font-weight: bold;');
+        console.log('%cパーフェクトワン LP - Animation System v1.0', 'color: #654321; font-size: 12px;');
+      })();
+    </script>
 
   </body>
 
