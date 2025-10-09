@@ -1097,6 +1097,31 @@
           display: inline;
         }
       }
+
+      /* 注釈マーク（※）のサイズ調整 */
+      .narration,
+      .product-concept,
+      .product-features li,
+      .review-text,
+      .lead,
+      .feature-items p {
+        font-size: inherit;
+      }
+
+      /* 注釈マークを小さく */
+      .narration::before,
+      .product-concept::before,
+      .product-features li::before,
+      .review-text::before,
+      .lead::before {
+        font-size: 0.8em;
+      }
+
+      /* テキスト内の※マークを小さく */
+      .small-note {
+        font-size: 0.75em;
+        opacity: 0.8;
+      }
     </style>
   </head>
   <body>
@@ -1149,7 +1174,7 @@
           <figure class="comic-scene">
             <a href="https://www.shinnihonseiyaku.co.jp/lp/promotion/cosme/2375b_19/" data-ga-event="cta_click" data-ga-label="manga-image"><img src="manga/04.png" alt="効果実感" loading="lazy" /></a>
             <figcaption>
-              <p class="narration">すごい！厚塗りじゃないのに、気になる部分を自然にカバー(※)してくれてる！<br>このツヤ感、理想的！<br>※メイクアップ効果による</p>
+              <p class="narration">すごい！厚塗りじゃないのに、気になる部分を自然にカバー<span class="small-note">(※)</span>してくれてる！<br>このツヤ感、理想的！<br><span class="small-note">※メイクアップ効果による</span></p>
             </figcaption>
           </figure>
 
@@ -1211,12 +1236,12 @@
                   <a href="https://www.shinnihonseiyaku.co.jp/lp/promotion/cosme/2375b_19/" data-ga-event="cta_click" data-ga-label="product-name" style="text-decoration: none; color: inherit;">
                     <h3>カバー力</h3>
                   </a>
-                  <p class="product-concept">厚塗り感なく、自然にカバー(※)</p>
+                  <p class="product-concept">厚塗り感なく、自然にカバー<span class="small-note">(※)</span></p>
                   <ul class="product-features">
-                    <li>シミ・毛穴・色ムラをひと塗りでカバー(※)</li>
+                    <li>シミ・毛穴・色ムラをひと塗りでカバー<span class="small-note">(※)</span></li>
                     <li>厚塗り感のない自然な仕上がり</li>
                     <li>気になる部分を優しくぼかす</li>
-                    <li>※メイクアップ効果による</li>
+                    <li><span class="small-note">※メイクアップ効果による</span></li>
                   </ul>
                 </div>
               </div>
@@ -1230,12 +1255,12 @@
                   <a href="https://www.shinnihonseiyaku.co.jp/lp/promotion/cosme/2375b_19/" data-ga-event="cta_click" data-ga-label="product-name" style="text-decoration: none; color: inherit;">
                     <h3>キープ力</h3>
                   </a>
-                  <p class="product-concept">夕方まで崩れにくい(※)</p>
+                  <p class="product-concept">夕方まで崩れにくい<span class="small-note">(※)</span></p>
                   <ul class="product-features">
                     <li>高密着処方で肌にピタッと密着</li>
                     <li>汗をはじき、崩れにくい</li>
-                    <li>夕方まで美しい仕上がりが続く(※)</li>
-                    <li>※メイクアップ効果による</li>
+                    <li>夕方まで美しい仕上がりが続く<span class="small-note">(※)</span></li>
+                    <li><span class="small-note">※メイクアップ効果による</span></li>
                   </ul>
                 </div>
               </div>
@@ -1299,11 +1324,11 @@
               <ul class="feature-items">
                 <li>
                   <h4>3種のコントロールカラー</h4>
-                  <p>肌色を自然に補正し、<br>くすみをカバー(※)<br>※メイクアップ効果による</p>
+                  <p>肌色を自然に補正し、<br>くすみをカバー<span class="small-note">(※)</span><br><span class="small-note">※メイクアップ効果による</span></p>
                 </li>
                 <li>
                   <h4>高密着スキンカバー処方</h4>
-                  <p>肌に密着し、<br>崩れにくい仕上がり(※)<br>※メイクアップ効果による</p>
+                  <p>肌に密着し、<br>崩れにくい仕上がり<span class="small-note">(※)</span><br><span class="small-note">※メイクアップ効果による</span></p>
                 </li>
                 <li>
                   <h4>キメの細かい<br>ハイグレードパフ</h4>
@@ -1349,7 +1374,7 @@
                 <a href="https://www.shinnihonseiyaku.co.jp/lp/promotion/cosme/2375b_19/" data-ga-event="cta_click" data-ga-label="review-title" style="text-decoration: none; color: inherit;">
                   <h3 class="review-title">ベースから整ったような仕上がり</h3>
                 </a>
-                <p class="review-text">小鼻の赤みも自然にカバー(※)できました！<br>厚塗り感がないのに、気になる部分が目立たなくて嬉しいです。<br>※メイクアップ効果による</p>
+                <p class="review-text">小鼻の赤みも自然にカバー<span class="small-note">(※)</span>できました！<br>厚塗り感がないのに、気になる部分が目立たなくて嬉しいです。<br><span class="small-note">※メイクアップ効果による</span></p>
               </div>
               <div class="user-info">
                 <p class="profile">30代女性（美沙子様）</p>
@@ -1359,9 +1384,9 @@
             <article class="testimonial-card testimonial-right">
               <div class="review-content">
                 <a href="https://www.shinnihonseiyaku.co.jp/lp/promotion/cosme/2375b_19/" data-ga-event="cta_click" data-ga-label="review-title" style="text-decoration: none; color: inherit;">
-                  <h3 class="review-title">シミやくすみが気にならない(※)</h3>
+                  <h3 class="review-title">シミやくすみが気にならない<span class="small-note">(※)</span></h3>
                 </a>
-                <p class="review-text">重ね塗りしなくても、シミやくすみが気にならなくなりました(※)。<br>厚塗り感なく使えて本当に助かります！<br>※メイクアップ効果による</p>
+                <p class="review-text">重ね塗りしなくても、シミやくすみが気にならなくなりました<span class="small-note">(※)</span>。<br>厚塗り感なく使えて本当に助かります！<br><span class="small-note">※メイクアップ効果による</span></p>
               </div>
               <div class="user-info">
                 <p class="profile">40代女性（美咲 花音様）</p>
@@ -1382,7 +1407,7 @@
 
           </div>
 
-          <p class="disclaimer">※個人の感想です。効果・効能を保証するものではありません。</p>
+          <p class="disclaimer"><span class="small-note">※個人の感想です。効果・効能を保証するものではありません。</span></p>
         </div>
       </section>
 
@@ -1392,7 +1417,7 @@
         <div class="ripple-effect" style="top: 60%; left: 80%; animation-delay: 3s;"></div>
         <div class="container">
           <h2>パーフェクトワンで始める<br>大人のツヤ肌メイク</h2>
-          <p class="lead">厚塗り感なく自然にカバー(※)、<br>メイク中も美容液級のうるおい<br>※メイクアップ効果による</p>
+          <p class="lead">厚塗り感なく自然にカバー<span class="small-note">(※)</span>、<br>メイク中も美容液級のうるおい<br><span class="small-note">※メイクアップ効果による</span></p>
 
           <div class="cta-box">
             <div class="price-section">
