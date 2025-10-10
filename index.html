@@ -660,7 +660,11 @@
       }
 
       /* Specific adjustments for feature images */
-      .product-step:nth-child(1) .product-content img,
+      .product-step:nth-child(1) .product-content img {
+        object-fit: contain;
+        object-position: center;
+      }
+
       .product-step:nth-child(3) .product-content img {
         object-fit: cover;
         object-position: center;
