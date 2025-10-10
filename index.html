@@ -141,6 +141,95 @@
         }
       }
 
+      /* ===== Luxury Narration Text Styling ===== */
+      .narration {
+        font-family: 'Noto Serif JP', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.9;
+        letter-spacing: 0.08em;
+        color: var(--luxury-brown);
+        text-shadow: 0 2px 8px rgba(139, 69, 19, 0.15);
+        background: linear-gradient(135deg, rgba(245, 230, 211, 0.8), rgba(248, 246, 243, 0.9));
+        padding: 20px 32px;
+        border-radius: 12px;
+        border-left: 4px solid var(--gold-accent);
+        box-shadow: 0 4px 20px rgba(139, 69, 19, 0.1);
+        position: relative;
+        animation: luxuryTextAppear 1s ease-out forwards, gentleGlow 3s ease-in-out infinite;
+        opacity: 0;
+      }
+
+      /* Stagger animation for each narration */
+      .comic-scene:nth-child(1) .narration { animation-delay: 0.3s, 0.3s; }
+      .comic-scene:nth-child(2) .narration { animation-delay: 0.4s, 0.4s; }
+      .comic-scene:nth-child(3) .narration { animation-delay: 0.5s, 0.5s; }
+      .comic-scene:nth-child(4) .narration { animation-delay: 0.6s, 0.6s; }
+      .comic-scene:nth-child(5) .narration { animation-delay: 0.7s, 0.7s; }
+
+      @keyframes luxuryTextAppear {
+        0% {
+          opacity: 0;
+          transform: translateY(20px) scale(0.95);
+        }
+        60% {
+          opacity: 1;
+          transform: translateY(-5px) scale(1.02);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes gentleGlow {
+        0%, 100% {
+          box-shadow: 0 4px 20px rgba(139, 69, 19, 0.1);
+        }
+        50% {
+          box-shadow: 0 6px 30px rgba(218, 165, 32, 0.25), 0 0 15px rgba(218, 165, 32, 0.1);
+        }
+      }
+
+      /* Decorative quote marks */
+      .narration::before,
+      .narration::after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        background-image: radial-gradient(circle, var(--gold-accent) 0%, transparent 70%);
+        opacity: 0.3;
+        border-radius: 50%;
+      }
+
+      .narration::before {
+        top: -8px;
+        left: -8px;
+      }
+
+      .narration::after {
+        bottom: -8px;
+        right: -8px;
+      }
+
+      /* Hover effect for narration */
+      .narration:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 35px rgba(139, 69, 19, 0.2);
+        border-left-color: var(--luxury-brown);
+        transition: all 0.4s ease;
+      }
+
+      /* Mobile responsive for narration */
+      @media (max-width: 768px) {
+        .narration {
+          font-size: 16px;
+          padding: 16px 24px;
+          letter-spacing: 0.05em;
+        }
+      }
+
       /* Luxury CTA Buttons with Enhanced Breathing Animation */
       .cta-button {
         background: var(--accent-gradient);
