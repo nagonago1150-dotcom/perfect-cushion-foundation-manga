@@ -1615,6 +1615,169 @@
         font-size: 0.55em;
         opacity: 0.6;
       }
+
+      /* ===== 漫画ナレーション文字アニメーション ===== */
+
+      /* 文字を囲むspan要素のスタイル */
+      .narration .char {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+        animation: charAppear 0.6s ease-out forwards,
+                   charFloat 3s ease-in-out infinite,
+                   charGlow 2s ease-in-out infinite;
+        position: relative;
+        will-change: transform, opacity;
+      }
+
+      /* 文字の登場アニメーション */
+      @keyframes charAppear {
+        0% {
+          opacity: 0;
+          transform: translateY(20px) scale(0.8) rotate(-5deg);
+        }
+        60% {
+          opacity: 1;
+          transform: translateY(-5px) scale(1.05) rotate(2deg);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1) rotate(0deg);
+        }
+      }
+
+      /* 文字の浮遊アニメーション（波のような動き） */
+      @keyframes charFloat {
+        0%, 100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-4px);
+        }
+      }
+
+      /* 文字のグロー効果 */
+      @keyframes charGlow {
+        0%, 100% {
+          text-shadow: 0 2px 8px rgba(139, 69, 19, 0.15);
+        }
+        50% {
+          text-shadow: 0 2px 15px rgba(218, 165, 32, 0.4),
+                       0 0 20px rgba(218, 165, 32, 0.2);
+        }
+      }
+
+      /* グラデーション色が流れるアニメーション */
+      @keyframes charColorFlow {
+        0%, 100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      /* 文字にグラデーションを適用 */
+      .narration .char {
+        background: linear-gradient(
+          90deg,
+          var(--luxury-brown) 0%,
+          var(--gold-accent) 25%,
+          var(--warm-brown) 50%,
+          var(--gold-accent) 75%,
+          var(--luxury-brown) 100%
+        );
+        background-size: 200% auto;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: charAppear 0.6s ease-out forwards,
+                   charFloat 3s ease-in-out infinite,
+                   charColorFlow 4s linear infinite;
+      }
+
+      /* ホバー時に文字が跳ねる */
+      .narration:hover .char {
+        animation: charAppear 0.6s ease-out forwards,
+                   charBounce 0.5s ease-in-out,
+                   charFloat 1.5s ease-in-out infinite,
+                   charColorFlow 2s linear infinite;
+      }
+
+      @keyframes charBounce {
+        0%, 100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-8px) scale(1.1);
+        }
+      }
+
+      /* 文字ごとに異なる遅延を設定（1～20文字目） */
+      .narration .char:nth-child(1) { animation-delay: 0.05s, 0s, 0s; }
+      .narration .char:nth-child(2) { animation-delay: 0.1s, 0.1s, 0.2s; }
+      .narration .char:nth-child(3) { animation-delay: 0.15s, 0.2s, 0.4s; }
+      .narration .char:nth-child(4) { animation-delay: 0.2s, 0.3s, 0.6s; }
+      .narration .char:nth-child(5) { animation-delay: 0.25s, 0.4s, 0.8s; }
+      .narration .char:nth-child(6) { animation-delay: 0.3s, 0.5s, 1s; }
+      .narration .char:nth-child(7) { animation-delay: 0.35s, 0.6s, 1.2s; }
+      .narration .char:nth-child(8) { animation-delay: 0.4s, 0.7s, 1.4s; }
+      .narration .char:nth-child(9) { animation-delay: 0.45s, 0.8s, 1.6s; }
+      .narration .char:nth-child(10) { animation-delay: 0.5s, 0.9s, 1.8s; }
+      .narration .char:nth-child(11) { animation-delay: 0.55s, 1s, 2s; }
+      .narration .char:nth-child(12) { animation-delay: 0.6s, 1.1s, 2.2s; }
+      .narration .char:nth-child(13) { animation-delay: 0.65s, 1.2s, 2.4s; }
+      .narration .char:nth-child(14) { animation-delay: 0.7s, 1.3s, 2.6s; }
+      .narration .char:nth-child(15) { animation-delay: 0.75s, 1.4s, 2.8s; }
+      .narration .char:nth-child(16) { animation-delay: 0.8s, 1.5s, 3s; }
+      .narration .char:nth-child(17) { animation-delay: 0.85s, 1.6s, 3.2s; }
+      .narration .char:nth-child(18) { animation-delay: 0.9s, 1.7s, 3.4s; }
+      .narration .char:nth-child(19) { animation-delay: 0.95s, 1.8s, 3.6s; }
+      .narration .char:nth-child(20) { animation-delay: 1s, 1.9s, 3.8s; }
+
+      /* 20文字以降は一定の遅延 */
+      .narration .char:nth-child(n+21) { animation-delay: 1.05s, 2s, 4s; }
+
+      /* 空白とbrタグは非表示にせず、そのまま */
+      .narration .char.space {
+        opacity: 1;
+        animation: none;
+        -webkit-text-fill-color: transparent;
+        width: 0.3em;
+      }
+
+      /* モバイルでのアニメーション調整 */
+      @media (max-width: 768px) {
+        .narration .char {
+          animation-duration: 0.5s, 2.5s, 1.5s;
+        }
+
+        @keyframes charFloat {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-2px);
+          }
+        }
+      }
+
+      /* アクセシビリティ: 動きを減らす設定の場合 */
+      @media (prefers-reduced-motion: reduce) {
+        .narration .char {
+          animation: charAppear 0.3s ease-out forwards;
+        }
+
+        @keyframes charAppear {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+            transform: none;
+          }
+        }
+      }
     </style>
   </head>
   <body>
@@ -2399,6 +2562,119 @@
         // Console message for developers
         console.log('%c✨ Enhanced Animations Loaded', 'color: #8B4513; font-size: 16px; font-weight: bold;');
         console.log('%cパーフェクトワン LP - Animation System v1.0', 'color: #654321; font-size: 12px;');
+      })();
+
+      // ===== 9. Character Animation for Narration Text =====
+      (function() {
+        function wrapCharacters(element) {
+          // 元のHTMLを取得
+          const originalHTML = element.innerHTML;
+
+          // テキストノードを処理する関数
+          function processNode(node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+              const text = node.textContent;
+              if (text.trim() === '') return node; // 空白のみの場合はそのまま
+
+              const fragment = document.createDocumentFragment();
+
+              // 一文字ずつ処理
+              for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const span = document.createElement('span');
+                span.className = 'char';
+
+                // 空白文字の場合は特別なクラスを追加
+                if (char === ' ' || char === '\u3000') { // 半角・全角スペース
+                  span.classList.add('space');
+                  span.innerHTML = '&nbsp;';
+                } else if (char === '\n') {
+                  // 改行は無視
+                  continue;
+                } else {
+                  span.textContent = char;
+                }
+
+                fragment.appendChild(span);
+              }
+
+              return fragment;
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+              // 要素ノード（<br>や<span class="small-note">など）の場合
+              const clone = node.cloneNode(false);
+
+              // 子ノードを再帰的に処理
+              Array.from(node.childNodes).forEach(child => {
+                const processed = processNode(child);
+                if (processed) {
+                  clone.appendChild(processed);
+                }
+              });
+
+              return clone;
+            }
+
+            return node.cloneNode(true);
+          }
+
+          // 元の要素の全子ノードを処理
+          const newContent = document.createDocumentFragment();
+          Array.from(element.childNodes).forEach(child => {
+            const processed = processNode(child);
+            if (processed) {
+              newContent.appendChild(processed);
+            }
+          });
+
+          // 要素の内容を置き換え
+          element.innerHTML = '';
+          element.appendChild(newContent);
+        }
+
+        // ページ読み込み時に全ての.narration要素を処理
+        document.addEventListener('DOMContentLoaded', () => {
+          const narrations = document.querySelectorAll('.narration');
+
+          narrations.forEach((narration, index) => {
+            // 少し遅延させて処理（ページ読み込み後にアニメーションが開始されるように）
+            setTimeout(() => {
+              wrapCharacters(narration);
+            }, index * 100); // 各ナレーションを順番に処理
+          });
+
+          console.log(`%c✨ Character Animation Applied to ${narrations.length} narrations`, 'color: #DAA520; font-size: 14px; font-weight: bold;');
+        });
+
+        // Intersection Observerで画面に表示されたときにアニメーション再生
+        const narrationObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.dataset.animated) {
+              entry.target.dataset.animated = 'true';
+
+              // 文字アニメーションのリスタート
+              const chars = entry.target.querySelectorAll('.char');
+              chars.forEach((char, index) => {
+                char.style.animation = 'none';
+                setTimeout(() => {
+                  char.style.animation = '';
+                }, 10);
+              });
+            }
+          });
+        }, {
+          threshold: 0.5,
+          rootMargin: '0px'
+        });
+
+        // 画面に表示されたら監視開始
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(() => {
+            const narrations = document.querySelectorAll('.narration');
+            narrations.forEach(narration => {
+              narrationObserver.observe(narration);
+            });
+          }, 500);
+        });
       })();
     </script>
 
