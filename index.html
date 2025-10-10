@@ -141,7 +141,7 @@
         }
       }
 
-      /* ===== Luxury Narration Text Styling ===== */
+      /* ===== Luxury Narration Text Styling with Dynamic Animations ===== */
       .narration {
         font-family: 'Noto Serif JP', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'Hiragino Mincho Pro', serif;
         font-size: 18px;
@@ -156,16 +156,19 @@
         border-left: 4px solid var(--gold-accent);
         box-shadow: 0 4px 20px rgba(139, 69, 19, 0.1);
         position: relative;
-        animation: luxuryTextAppear 1s ease-out forwards, gentleGlow 3s ease-in-out infinite;
+        animation: luxuryTextAppear 1s ease-out forwards,
+                   gentleGlow 3s ease-in-out infinite,
+                   subtleFloat 4s ease-in-out infinite;
         opacity: 0;
+        overflow: hidden;
       }
 
       /* Stagger animation for each narration */
-      .comic-scene:nth-child(1) .narration { animation-delay: 0.3s, 0.3s; }
-      .comic-scene:nth-child(2) .narration { animation-delay: 0.4s, 0.4s; }
-      .comic-scene:nth-child(3) .narration { animation-delay: 0.5s, 0.5s; }
-      .comic-scene:nth-child(4) .narration { animation-delay: 0.6s, 0.6s; }
-      .comic-scene:nth-child(5) .narration { animation-delay: 0.7s, 0.7s; }
+      .comic-scene:nth-child(1) .narration { animation-delay: 0.3s, 0.3s, 0.3s; }
+      .comic-scene:nth-child(2) .narration { animation-delay: 0.4s, 0.4s, 0.8s; }
+      .comic-scene:nth-child(3) .narration { animation-delay: 0.5s, 0.5s, 1.3s; }
+      .comic-scene:nth-child(4) .narration { animation-delay: 0.6s, 0.6s, 1.8s; }
+      .comic-scene:nth-child(5) .narration { animation-delay: 0.7s, 0.7s, 2.3s; }
 
       @keyframes luxuryTextAppear {
         0% {
@@ -191,34 +194,116 @@
         }
       }
 
-      /* Decorative quote marks */
-      .narration::before,
+      /* Subtle floating animation */
+      @keyframes subtleFloat {
+        0%, 100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-3px);
+        }
+      }
+
+      /* Animated gradient background overlay */
+      .narration::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+          transparent,
+          rgba(218, 165, 32, 0.15),
+          transparent
+        );
+        animation: shimmerSlide 3s ease-in-out infinite;
+        z-index: 0;
+      }
+
+      @keyframes shimmerSlide {
+        0% {
+          left: -100%;
+        }
+        50%, 100% {
+          left: 100%;
+        }
+      }
+
+      /* Decorative pulsing accent dots */
       .narration::after {
         content: '';
         position: absolute;
-        width: 24px;
-        height: 24px;
-        background-image: radial-gradient(circle, var(--gold-accent) 0%, transparent 70%);
-        opacity: 0.3;
-        border-radius: 50%;
-      }
-
-      .narration::before {
         top: -8px;
-        left: -8px;
-      }
-
-      .narration::after {
-        bottom: -8px;
         right: -8px;
+        width: 16px;
+        height: 16px;
+        background: radial-gradient(circle, var(--gold-accent), rgba(218, 165, 32, 0.3));
+        border-radius: 50%;
+        animation: pulseGlow 2s ease-in-out infinite;
+        z-index: 2;
       }
 
-      /* Hover effect for narration */
+      @keyframes pulseGlow {
+        0%, 100% {
+          opacity: 0.6;
+          transform: scale(1);
+          box-shadow: 0 0 5px rgba(218, 165, 32, 0.4);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.3);
+          box-shadow: 0 0 15px rgba(218, 165, 32, 0.8);
+        }
+      }
+
+      /* Text content needs higher z-index */
+      .narration > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Gradient text color animation */
+      @keyframes colorShift {
+        0%, 100% {
+          color: var(--luxury-brown);
+        }
+        50% {
+          color: var(--warm-brown);
+        }
+      }
+
+      /* Border animation */
+      @keyframes borderPulse {
+        0%, 100% {
+          border-left-color: var(--gold-accent);
+        }
+        50% {
+          border-left-color: var(--luxury-brown);
+        }
+      }
+
+      .narration {
+        animation: luxuryTextAppear 1s ease-out forwards,
+                   gentleGlow 3s ease-in-out infinite,
+                   subtleFloat 4s ease-in-out infinite,
+                   colorShift 6s ease-in-out infinite,
+                   borderPulse 3s ease-in-out infinite;
+      }
+
+      /* Hover effect for narration - enhanced */
       .narration:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 35px rgba(139, 69, 19, 0.2);
-        border-left-color: var(--luxury-brown);
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 10px 40px rgba(139, 69, 19, 0.25);
         transition: all 0.4s ease;
+      }
+
+      .narration:hover::before {
+        animation-duration: 1.5s;
+      }
+
+      .narration:hover::after {
+        animation-duration: 1s;
       }
 
       /* Mobile responsive for narration */
@@ -227,6 +312,11 @@
           font-size: 16px;
           padding: 16px 24px;
           letter-spacing: 0.05em;
+        }
+
+        .narration::after {
+          width: 12px;
+          height: 12px;
         }
       }
 
