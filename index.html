@@ -246,7 +246,8 @@
 
       @keyframes pulseGlow {
         0%, 100% {
-          opacity: 0.6;
+          opacity: 0.85;
+        font-weight: 500;
           transform: scale(1);
           box-shadow: 0 0 5px rgba(218, 165, 32, 0.4);
         }
@@ -501,7 +502,8 @@
         border-radius: 50%;
         background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(139, 69, 19, 0.1));
         animation: floatBubble linear infinite;
-        opacity: 0.6;
+        opacity: 0.85;
+        font-weight: 500;
       }
 
       .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; animation-duration: 8s; animation-delay: 0s; }
@@ -517,8 +519,10 @@
           transform: translateX(0) rotate(0deg);
           opacity: 0;
         }
-        10% { opacity: 0.6; }
-        90% { opacity: 0.6; }
+        10% { opacity: 0.85;
+        font-weight: 500; }
+        90% { opacity: 0.85;
+        font-weight: 500; }
         100% {
           bottom: 100vh;
           transform: translateX(-50px) rotate(360deg);
@@ -815,7 +819,8 @@
         box-shadow: 0 2px 8px rgba(139, 69, 19, 0.05);
         z-index: 100;
         backdrop-filter: blur(10px);
-        opacity: 0.6;
+        opacity: 0.85;
+        font-weight: 500;
       }
 
 
@@ -1625,8 +1630,9 @@
 
       /* テキスト内の※マークを小さく */
       .small-note {
-        font-size: 0.55em;
-        opacity: 0.6;
+        font-size: 0.7em;
+        opacity: 0.85;
+        font-weight: 500;
       }
 
       /* ===== 漫画ナレーション文字アニメーション ===== */
@@ -1946,12 +1952,14 @@
                   </a>
                   <p class="product-concept">輝くような上品なツヤを演出</p>
                   <ul class="product-features">
-                    <li>・ダイヤモンドパウダー</li>
-                    <li>・パールパウダー</li>
+                    <li>・ダイヤモンドパウダー配合<span class="small-note">※1</span></li>
+                    <li>・パールパウダー配合<span class="small-note">※2</span></li>
                     <li>テカリとは違う、上品な輝き</li>
                     <li>発光するようなツヤ肌に</li>
                   </ul>
                     <li><span class="small-note">※メイクアップ効果による</span></li>
+                    <li><span class="small-note">※1 ダイヤモンド末（潤滑剤）</span></li>
+                    <li><span class="small-note">※2 合成フルオロフロゴパイト（体質顔料）</span></li>
                 </div>
               </div>
             </article>
@@ -1967,9 +1975,11 @@
                   <p class="product-concept">メイク中も美容液級のうるおい</p>
                   <ul class="product-features">
                     <li>65種の保湿成分配合</li>
-                    <li>・膨密コラーゲン：<span class="small-note">※アテロコラーゲン、コンドロイチン硫酸Na（皮膚コンディショニング剤）</span><br>・膨密ヒアルロン酸：<span class="small-note">※ヒアルロン酸Na（保湿成分）</span></li>
+                    <li>・膨密コラーゲン配合<span class="small-note">※1</span><br>・膨密ヒアルロン酸配合<span class="small-note">※2</span></li>
                     <li>メイクしながらスキンケア</li>
                     <li>乾燥から肌を守る</li>
+                    <li><span class="small-note">※1 アテロコラーゲン、コンドロイチン硫酸Na（皮膚コンディショニング剤）</span></li>
+                    <li><span class="small-note">※2 ヒアルロン酸Na（保湿成分）</span></li>
                   </ul>
                 </div>
               </div>
